@@ -79,9 +79,8 @@ h1,h2,h3{margin:0 0 10px;}
 
 /* ============ 首頁 ============ */
 .hero{text-align:center;padding:5vh 10px 20px;}
-.hero-emoji{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:nowrap;font-size:42px;line-height:1;letter-spacing:0;}
-.hero-emoji > span{font-size:42px;line-height:1;}
-.hero-emoji .animal-icon{width:42px;height:42px;object-fit:contain;flex:0 0 auto;}
+.hero-emoji{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;line-height:1;padding:4px 0;}
+.hero-emoji .animal-icon{width:52px;height:52px;object-fit:contain;flex:0 0 auto;background:#fffaf3;border-radius:14px;padding:4px;box-shadow:0 2px 0 rgba(0,0,0,.06);}
 
 .hero h1{font-size:clamp(34px,7vw,52px);color:#b8561a;letter-spacing:2px;margin:14px 0 0;}
 .slogan{font-size:clamp(20px,4.2vw,28px);font-weight:800;color:#7a5227;margin:20px 0 38px;letter-spacing:1px;}
@@ -292,6 +291,11 @@ td.ans{color:#276b42;font-weight:700;}
 .src-fake-page .fake-site{font-size:13px;color:#c45;font-weight:800;letter-spacing:.5px;margin-bottom:6px;}
 .src-fake-page h4{margin:0 0 10px;color:#c45;font-size:22px;}
 .src-fake-page .fake-warn{margin-top:16px;padding:12px;border-radius:12px;background:#fff3cd;border:2px dashed #e0a800;font-size:16px;color:#7a5a10;}
+
+.src-open-link{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;padding:12px 18px;border-radius:999px;background:#e07b34;color:#fff;font-weight:900;font-size:18px;text-decoration:none;border:0;}
+.src-open-link:hover{filter:brightness(1.05);}
+.src-open-link:active{transform:scale(.98);}
+.src-article .src-ref code{display:block;margin-top:6px;font-size:13px;word-break:break-all;color:#6a5538;}
 </style>
 </head>
 <body>
@@ -305,7 +309,13 @@ td.ans{color:#276b42;font-weight:700;}
 <!-- ============ 畫面 0：首頁 ============ -->
 <section id="s0" class="screen active">
   <div class="hero">
-    <div class="hero-emoji" aria-hidden="true"><span>🐢</span><img class="animal-icon" src="assets/meerkat.png" alt=""><span>🐭</span><span>🐰</span><span>🐪</span></div>
+    <div class="hero-emoji" aria-hidden="true">
+      <img class="animal-icon" src="assets/tortoise.png" alt="">
+      <img class="animal-icon" src="assets/meerkat.png" alt="">
+      <img class="animal-icon" src="assets/jerboa.png" alt="">
+      <img class="animal-icon" src="assets/hare.png" alt="">
+      <img class="animal-icon" src="assets/camel.png" alt="">
+    </div>
     <h1>沙漠小偵探</h1>
     <p class="slogan">揀動物 → 搵線索 → 講發現！</p>
     <div class="hero-btns">
@@ -367,12 +377,12 @@ td.ans{color:#276b42;font-weight:700;}
 <!-- ============ 畫面 4：資料站 + 記錄板 ============ -->
 <section id="s4" class="screen">
   <h2 class="sc-title">④ 資料站 + 記錄板</h2>
-  <p class="sc-sub">先點資料站睇線索（當中可能有亂作內容，要分辨可靠與否），再把「特徵」和「適應」貼紙配對。</p>
+  <p class="sc-sub">先點資料站睇摘要（可開連結睇原頁；當中可能有亂作內容），再把「特徵」和「適應」貼紙配對。</p>
 
   <div class="two-col">
     <div class="card">
       <h3>📚 資料站</h3>
-      <p class="small">點一點來源，就會彈框顯示資料／短片（唔會開新分頁）。留意：有一個「熱門轉載」可能唔可靠。</p>
+      <p class="small">點一點來源睇摘要／短片；資料卡同可信網站可再撳連結開新分頁睇原頁。留意：有一個「熱門轉載」可能唔可靠。</p>
       <div id="sourceBtns"></div>
     </div>
 
@@ -484,7 +494,7 @@ td.ans{color:#276b42;font-weight:700;}
 /* ================= 資料 ================= */
 var ANIMALS = [
   {
-    key:'tortoise', name:'盾臂龜', full:'盾臂龜（蘇卡達象龜）', emoji:'🐢',
+    key:'tortoise', name:'盾臂龜', full:'盾臂龜（蘇卡達象龜）', emoji:'🐢', icon:'assets/tortoise.png',
     pairs:[
       {t:'堅硬的龜殼', a:'抵禦敵人攻擊'},
       {t:'粗壯的前肢', a:'挖掘沙洞避暑'},
@@ -551,7 +561,7 @@ var ANIMALS = [
     ]
   },
   {
-    key:'jerboa', name:'非洲跳鼠', full:'非洲跳鼠', emoji:'🐭',
+    key:'jerboa', name:'非洲跳鼠', full:'非洲跳鼠', emoji:'🐭', icon:'assets/jerboa.png',
     pairs:[
       {t:'強而長的後腿', a:'快速跳躍逃走'},
       {t:'一對大耳朵', a:'幫助身體散熱'},
@@ -584,7 +594,7 @@ var ANIMALS = [
     ]
   },
   {
-    key:'hare', name:'沙漠野兔', full:'沙漠野兔', emoji:'🐰',
+    key:'hare', name:'沙漠野兔', full:'沙漠野兔', emoji:'🐰', icon:'assets/hare.png',
     pairs:[
       {t:'一對長耳朵', a:'散熱降溫'},
       {t:'淺色的毛', a:'融入沙地，不易被發現'},
@@ -617,7 +627,7 @@ var ANIMALS = [
     ]
   },
   {
-    key:'camel', name:'駱駝', full:'駱駝', emoji:'🐪',
+    key:'camel', name:'駱駝', full:'駱駝', emoji:'🐪', icon:'assets/camel.png',
     pairs:[
       {t:'背上的駝峰', a:'儲存脂肪作為能量'},
       {t:'長長的睫毛', a:'阻擋風沙吹入眼睛'},
@@ -1287,14 +1297,24 @@ function openSourceModal(src){
     return;
   }
 
-  // 資料卡／可信網站：多數中文站禁止 iframe，改喺彈框顯示整理好嘅內容＋來源網址
+  // 資料卡／可信網站：彈框顯示摘要；連結開新分頁睇原網站
   var wrap = document.createElement('div');
   wrap.className = 'src-article';
   wrap.innerHTML = src.body || '<p>暫未有摘要。</p>';
   if(src.url){
     var ref = document.createElement('div');
     ref.className = 'src-ref';
-    ref.innerHTML = '<div style="margin-bottom:6px;font-weight:800;color:#8a4410;">來源網站（課堂可請老師出示）</div>';
+    var lab = document.createElement('div');
+    lab.style.cssText = 'margin-bottom:6px;font-weight:800;color:#8a4410;';
+    lab.textContent = '想睇完整網頁？撳下面開新分頁：';
+    ref.appendChild(lab);
+    var a = document.createElement('a');
+    a.className = 'src-open-link';
+    a.href = src.url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = '🔗 開啟來源網站';
+    ref.appendChild(a);
     var code = document.createElement('code');
     code.textContent = src.url;
     ref.appendChild(code);
