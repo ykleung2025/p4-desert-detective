@@ -257,6 +257,19 @@ td.ans{color:#276b42;font-weight:700;}
 .pick-card .pn{font-size:20px;}
 .pick-card.selected{border-color:#2f8f5b;background:#e8f7ee;box-shadow:0 0 0 3px rgba(47,143,91,.25);}
 .t-draw-box{margin-bottom:18px;}
+
+.src-modal{position:fixed;inset:0;background:rgba(40,24,10,.55);display:flex;align-items:center;justify-content:center;z-index:80;padding:16px;}
+.src-modal.hidden{display:none;}
+.src-modal-card{background:#fffaf3;border-radius:22px;width:min(920px,96vw);max-height:90vh;display:flex;flex-direction:column;box-shadow:0 18px 50px rgba(0,0,0,.28);border:3px solid #f0d4b0;overflow:hidden;}
+.src-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:#fff3e0;border-bottom:2px solid #f0d4b0;}
+.src-modal-head h3{margin:0;font-size:22px;color:#8a4410;}
+.src-modal-body{padding:0;flex:1;min-height:280px;overflow:auto;background:#fff;}
+.src-modal-body iframe{width:100%;height:min(62vh,520px);border:0;display:block;background:#111;}
+.src-article{padding:18px 20px 24px;font-size:19px;line-height:1.55;color:#3a2a1a;}
+.src-article h4{margin:0 0 10px;color:#b8561a;font-size:22px;}
+.src-article ul{margin:8px 0 12px 1.2em;padding:0;}
+.src-article li{margin:6px 0;}
+.src-ref{margin-top:14px;padding-top:12px;border-top:1px dashed #e2c9a8;font-size:15px;color:#8a7358;word-break:break-all;}
 </style>
 </head>
 <body>
@@ -332,12 +345,12 @@ td.ans{color:#276b42;font-weight:700;}
 <!-- ============ 畫面 4：資料站 + 記錄板 ============ -->
 <section id="s4" class="screen">
   <h2 class="sc-title">④ 資料站 + 記錄板</h2>
-  <p class="sc-sub">先在資料站找線索，再把「特徵」和「適應」貼紙配對。</p>
+  <p class="sc-sub">先點資料站睇線索（彈框觀看），再把「特徵」和「適應」貼紙配對。</p>
 
   <div class="two-col">
     <div class="card">
       <h3>📚 資料站</h3>
-      <p class="small">點一點來源，就可以看資料。</p>
+      <p class="small">點一點來源，就會彈框顯示資料（唔會開新分頁）。</p>
       <div id="sourceBtns"></div>
     </div>
 
@@ -430,6 +443,18 @@ td.ans{color:#276b42;font-weight:700;}
   </div>
 </div>
 
+
+<!-- 資料站彈框（唔開新分頁） -->
+<div id="srcModal" class="src-modal hidden" role="dialog" aria-modal="true" aria-labelledby="srcModalTitle">
+  <div class="src-modal-card">
+    <div class="src-modal-head">
+      <h3 id="srcModalTitle">資料</h3>
+      <button type="button" class="icon-btn" id="srcModalClose" aria-label="關閉">✕</button>
+    </div>
+    <div class="src-modal-body" id="srcModalBody"></div>
+  </div>
+</div>
+
 <script>
 (function(){
 'use strict';
@@ -444,7 +469,25 @@ var ANIMALS = [
       {t:'淺黃褐色的皮膚', a:'反射陽光，減少吸熱'}
     ],
     habit:'日間活動，喜歡掘洞躲入沙中避開中午的高溫，主要吃沙漠植物。',
-    sourceNames:['資料小卡：盾臂龜檔案','可信網站：沙漠動物百科','短片：盾臂龜掘洞實錄']
+    sources:[
+      {
+        title:'資料小卡：盾臂龜檔案',
+        kind:'article',
+        url:'https://www.zoo.gov.taipei/News_Content.aspx?n=CBF299753897CE64&s=661DE6C06A4F04B0&sms=E9D5496AB5D7C2B7',
+        body:'<h4>🐢 盾臂龜（蘇卡達象龜）</h4><ul><li>分布：非洲撒哈拉沙漠南緣的乾燥草原、沙漠邊緣。</li><li>特徵：背甲前後緣呈鋸齒狀，前肢鱗片大而重疊，擅長掘洞。</li><li>適應：多在清晨和黃昏活動；太熱會躲進洞，也能用唾液幫助降溫。</li><li>食性：吃高纖維植物，主要從食物取得水分。</li></ul>'
+      },
+      {
+        title:'可信網站：壽山動物園．蘇卡達象龜',
+        kind:'article',
+        url:'https://zoo.kcg.gov.tw/zh-tw/animal/46/',
+        body:'<h4>🌐 動物園資料摘要</h4><ul><li>蘇卡達象龜是世界體型第三大的陸龜。</li><li>生活在炎熱乾燥環境，白天高溫時減少活動。</li><li>身體強壯、活動力高；以植物為主食來攝取水分。</li></ul><p>課堂可對照：龜殼保護、掘洞避暑、淺色外觀減少吸熱。</p>'
+      },
+      {
+        title:'短片：盾臂龜（蘇卡達）介紹',
+        kind:'video',
+        url:'https://www.youtube.com/embed/ZFwgowZsegk'
+      }
+    ]
   },
   {
     key:'meerkat', name:'狐獴', full:'狐獴', emoji:'🦦',
@@ -454,7 +497,25 @@ var ANIMALS = [
       {t:'成群一起生活', a:'互相取暖、輪流站崗'}
     ],
     habit:'日間活動，成群生活，會輪流站崗放哨，住在沙地下面的洞穴。',
-    sourceNames:['資料小卡：狐獴檔案','可信網站：非洲動物小百科','短片：狐獴站崗實錄']
+    sources:[
+      {
+        title:'資料小卡：狐獴檔案',
+        kind:'article',
+        url:'https://www.nationalzoo.si.edu/animals/meerkat',
+        body:'<h4>🦦 狐獴</h4><ul><li>分布：非洲南部乾燥草原、開闊平原。</li><li>特徵：眼周有深色斑，像「太陽眼鏡」減少眩光；前爪有力，擅於掘洞。</li><li>適應：住在地下洞穴避暑；群體輪流站崗，發現危險會示警。</li><li>水分：大多從食物取得，減少需要直接喝水。</li></ul>'
+      },
+      {
+        title:'可信網站：Smithsonian 國家動物園．Meerkat',
+        kind:'article',
+        url:'https://www.nationalzoo.si.edu/animals/meerkat',
+        body:'<h4>🌐 機構資料摘要</h4><ul><li>狐獴屬於獴科，群體生活，有時一群可達約 30 隻。</li><li>站崗者負責留意天敵，其他同伴覓食或照顧幼獸。</li><li>深色眼斑有助在強烈陽光下看得更清楚。</li></ul>'
+      },
+      {
+        title:'短片：狐獴怎樣合作求生',
+        kind:'video',
+        url:'https://www.youtube.com/embed/3HRplufFGBs'
+      }
+    ]
   },
   {
     key:'jerboa', name:'非洲跳鼠', full:'非洲跳鼠', emoji:'🐭',
@@ -464,7 +525,25 @@ var ANIMALS = [
       {t:'長長的尾巴', a:'跳躍時保持平衡'}
     ],
     habit:'夜間活動，日間躲在洞穴裡，主要吃種子和昆蟲。',
-    sourceNames:['資料小卡：非洲跳鼠檔案','可信網站：沙漠生物資料庫','短片：跳鼠跳躍實錄']
+    sources:[
+      {
+        title:'資料小卡：非洲跳鼠檔案',
+        kind:'article',
+        url:'https://kids.britannica.com/students/article/jerboa/327554',
+        body:'<h4>🐭 跳鼠（Jerboa）</h4><ul><li>分布：亞洲與北非的沙漠、乾旱平原。</li><li>特徵：後腿特別長，可大躍步逃走；尾巴長，幫助平衡。</li><li>適應：日間躲在洞裡，夜間出來覓食；大耳朵有助散熱。</li><li>食性：種子、植物，有時吃昆蟲；水分多從食物取得。</li></ul>'
+      },
+      {
+        title:'可信網站：牛津大學博物館 Learning Zone',
+        kind:'article',
+        url:'https://learningzone.oumnh.ox.ac.uk/excretion',
+        body:'<h4>🌐 沙漠求生小知識</h4><ul><li>跳鼠生活在缺水環境，腎臟會盡量回收水分，尿液很濃。</li><li>強勁後腿一次可跳很遠，方便逃走和在沙地移動。</li><li>課堂對照：長後腿跳躍、大耳散熱、長尾平衡。</li></ul>'
+      },
+      {
+        title:'短片：跳鼠小檔案',
+        kind:'video',
+        url:'https://www.youtube.com/embed/BhecZbJscpY'
+      }
+    ]
   },
   {
     key:'hare', name:'沙漠野兔', full:'沙漠野兔', emoji:'🐰',
@@ -474,7 +553,25 @@ var ANIMALS = [
       {t:'強壯的後腿', a:'高速奔跑逃走'}
     ],
     habit:'多在清晨和黃昏活動，獨自生活，吃沙漠植物。',
-    sourceNames:['資料小卡：沙漠野兔檔案','可信網站：動物適應小百科','短片：野兔奔跑實錄']
+    sources:[
+      {
+        title:'資料小卡：沙漠野兔檔案',
+        kind:'article',
+        url:'https://www.desertmuseum.org/kids/facts/?animal=Black-tailed+and+Antelope+Jackrabbit',
+        body:'<h4>🐰 沙漠野兔／長耳大野兔</h4><ul><li>長耳朵不只聽到敵人，還像「散熱器」：耳內有很多血管，熱時把熱量散到空氣中。</li><li>淺色毛有助融入沙地，較難被發現。</li><li>強壯後腿可高速奔跑逃走；白天炎熱時較少活動，減少失水。</li></ul>'
+      },
+      {
+        title:'可信網站：美國國家公園．長耳大野兔',
+        kind:'article',
+        url:'https://www.nps.gov/whsa/learn/nature/black-tailed-jackrabbit.htm',
+        body:'<h4>🌐 機構資料摘要</h4><ul><li>長耳朵幫助聽覺，也幫助調節體溫。</li><li>天熱時耳部血管擴張，把體內熱量散走；天冷則減少血流保暖。</li><li>喜歡開闊地方，方便發現敵人並快速逃走。</li></ul>'
+      },
+      {
+        title:'短片：野兔與猛禽追逐（觀察跑步）',
+        kind:'video',
+        url:'https://www.youtube.com/embed/Ai3eVjr0Pzg'
+      }
+    ]
   },
   {
     key:'camel', name:'駱駝', full:'駱駝', emoji:'🐪',
@@ -484,7 +581,25 @@ var ANIMALS = [
       {t:'寬厚的腳掌', a:'在沙上行走不會陷下去'}
     ],
     habit:'可以長時間不喝水，日間活動，喜歡成群一起生活。',
-    sourceNames:['資料小卡：駱駝檔案','可信網站：世界自然基金會．駱駝','短片：駱駝行走沙丘']
+    sources:[
+      {
+        title:'資料小卡：駱駝檔案',
+        kind:'article',
+        url:'https://www.nhm.ac.uk/discover/how-do-camels-survive-in-deserts.html',
+        body:'<h4>🐪 駱駝</h4><ul><li>駝峰儲存的是<strong>脂肪</strong>（不是水），缺少食物時轉成能量。</li><li>長睫毛、可關閉的鼻孔，減少風沙進入眼睛和鼻子。</li><li>寬厚腳掌分散重量，較不易陷入沙中。</li><li>很會節約用水：少出汗、尿液濃；需要時可一次喝很多水補充。</li></ul>'
+      },
+      {
+        title:'可信網站：WWF．駱駝的超能力',
+        kind:'article',
+        url:'https://www.worldwildlife.org/resources/explainers/wildlife-climate-heroes/what-do-camels-store-in-their-humps-and-other-camel-superpowers/',
+        body:'<h4>🌐 WWF 資料摘要</h4><ul><li>常見誤解：駝峰裝水 ✗；正確：駝峰主要儲存脂肪 ✓。</li><li>駱駝能在乾旱環境長途行走，對乾旱地區社區亦很重要。</li><li>課堂可核對：脂肪能量、睫毛擋沙、腳掌走沙。</li></ul>'
+      },
+      {
+        title:'短片：駱駝怎樣適應沙漠',
+        kind:'video',
+        url:'https://www.youtube.com/embed/FSjZm_QIGAg'
+      }
+    ]
   }
 ];
 
@@ -848,17 +963,17 @@ function renderScreen4(){
   if(!g || !g.animal){ go(1); return; }
   var a = ANIMAL_MAP[g.animal];
 
-  // 資料來源按鈕
+  // 資料來源按鈕（彈框觀看，唔開新分頁）
   var sb = document.getElementById('sourceBtns');
   sb.innerHTML = '';
   var icons = ['🗂️','🌐','🎬'];
-  a.sourceNames.forEach(function(name, i){
+  var list = a.sources || [];
+  list.forEach(function(src, i){
     var b = document.createElement('button');
+    b.type = 'button';
     b.className = 'source-btn';
-    b.innerHTML = '<span class="sb-icon">' + (icons[i] || '📄') + '</span><span>' + name + '</span>';
-    b.addEventListener('click', function(){
-      toast('課堂請用老師提供的連結／QR');
-    });
+    b.innerHTML = '<span class="sb-icon">' + (icons[i] || '📄') + '</span><span>' + src.title + '</span>';
+    b.addEventListener('click', function(){ openSourceModal(src); });
     sb.appendChild(b);
   });
 
@@ -1075,6 +1190,49 @@ function doResetDraw(){
   toast('已重設抽籤，可以重新開始！');
 }
 
+
+/* ================= 資料站彈框 ================= */
+function openSourceModal(src){
+  var modal = document.getElementById('srcModal');
+  var title = document.getElementById('srcModalTitle');
+  var body = document.getElementById('srcModalBody');
+  if(!modal || !src) return;
+  title.textContent = src.title || '資料';
+  body.innerHTML = '';
+
+  if(src.kind === 'video' && src.url){
+    var iframe = document.createElement('iframe');
+    iframe.src = src.url + (src.url.indexOf('?') >= 0 ? '&' : '?') + 'rel=0';
+    iframe.title = src.title || '短片';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    body.appendChild(iframe);
+  } else {
+    var wrap = document.createElement('div');
+    wrap.className = 'src-article';
+    wrap.innerHTML = src.body || '<p>暫未有摘要。</p>';
+    if(src.url){
+      var ref = document.createElement('div');
+      ref.className = 'src-ref';
+      ref.textContent = '來源：' + src.url;
+      wrap.appendChild(ref);
+    }
+    body.appendChild(wrap);
+  }
+
+  modal.classList.remove('hidden');
+}
+
+function closeSourceModal(){
+  var modal = document.getElementById('srcModal');
+  var body = document.getElementById('srcModalBody');
+  if(body){
+    // 停播短片
+    body.innerHTML = '';
+  }
+  if(modal) modal.classList.add('hidden');
+}
+
 /* ================= 事件綁定 ================= */
 function bindEvents(){
   // 首頁
@@ -1088,6 +1246,14 @@ function bindEvents(){
   });
 
   document.getElementById('teacherBtn').addEventListener('click', openTeacher);
+
+  document.getElementById('srcModalClose').addEventListener('click', closeSourceModal);
+  document.getElementById('srcModal').addEventListener('click', function(e){
+    if(e.target === this) closeSourceModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeSourceModal();
+  });
 
   // 頂欄
   document.getElementById('homeBtn').addEventListener('click', function(){ go(0); });
