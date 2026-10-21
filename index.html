@@ -276,6 +276,20 @@ td.ans{color:#276b42;font-weight:700;}
 .src-article ul{margin:8px 0 12px 1.2em;padding:0;}
 .src-article li{margin:6px 0;}
 .src-ref{margin-top:14px;padding-top:12px;border-top:1px dashed #e2c9a8;font-size:15px;color:#8a7358;word-break:break-all;}
+
+.animal-icon{width:48px;height:48px;object-fit:contain;display:block;margin:0 auto;}
+.animal-icon.lg{width:72px;height:72px;}
+.animal-icon.sm{width:28px;height:28px;display:inline-block;vertical-align:middle;margin-right:4px;}
+.pick-card .pe,.ab-emoji{display:flex;align-items:center;justify-content:center;min-height:56px;}
+.pick-card .pe .animal-icon{width:56px;height:56px;}
+.ab-emoji .animal-icon{width:72px;height:72px;}
+.hero-emoji{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
+.hero-emoji .animal-icon{width:40px;height:40px;}
+.src-fake-badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:#ffe8e0;color:#b33;font-size:13px;font-weight:800;}
+.src-fake-page{padding:18px 20px 24px;background:linear-gradient(#fff,#fff8f0);font-size:18px;line-height:1.55;color:#3a2a1a;}
+.src-fake-page .fake-site{font-size:13px;color:#c45;font-weight:800;letter-spacing:.5px;margin-bottom:6px;}
+.src-fake-page h4{margin:0 0 10px;color:#c45;font-size:22px;}
+.src-fake-page .fake-warn{margin-top:16px;padding:12px;border-radius:12px;background:#fff3cd;border:2px dashed #e0a800;font-size:16px;color:#7a5a10;}
 </style>
 </head>
 <body>
@@ -289,7 +303,7 @@ td.ans{color:#276b42;font-weight:700;}
 <!-- ============ 畫面 0：首頁 ============ -->
 <section id="s0" class="screen active">
   <div class="hero">
-    <div class="hero-emoji">🐢 🦦 🐭 🐰 🐪</div>
+    <div class="hero-emoji"><span aria-hidden="true">🐢</span><img class="animal-icon" src="assets/meerkat.png" alt="狐獴"><span aria-hidden="true">🐭</span><span aria-hidden="true">🐰</span><span aria-hidden="true">🐪</span></div>
     <h1>沙漠小偵探</h1>
     <p class="slogan">揀動物 → 搵線索 → 講發現！</p>
     <div class="hero-btns">
@@ -351,12 +365,12 @@ td.ans{color:#276b42;font-weight:700;}
 <!-- ============ 畫面 4：資料站 + 記錄板 ============ -->
 <section id="s4" class="screen">
   <h2 class="sc-title">④ 資料站 + 記錄板</h2>
-  <p class="sc-sub">先點資料站睇線索（彈框觀看），再把「特徵」和「適應」貼紙配對。</p>
+  <p class="sc-sub">先點資料站睇線索（當中可能有亂作內容，要分辨可靠與否），再把「特徵」和「適應」貼紙配對。</p>
 
   <div class="two-col">
     <div class="card">
       <h3>📚 資料站</h3>
-      <p class="small">點一點來源，就會彈框開啟網頁／短片（唔會開新分頁）。</p>
+      <p class="small">點一點來源，就會彈框開啟網頁／短片（唔會開新分頁）。留意：有一個「熱門轉載」可能唔可靠。</p>
       <div id="sourceBtns"></div>
     </div>
 
@@ -477,26 +491,32 @@ var ANIMALS = [
     habit:'日間活動，喜歡掘洞躲入沙中避開中午的高溫，主要吃沙漠植物。',
     sources:[
       {
-        title:'資料小卡：盾臂龜檔案',
+        title:'資料小卡：臺北動物園．蘇卡達象龜',
         kind:'page',
         url:'https://www.zoo.gov.taipei/News_Content.aspx?n=CBF299753897CE64&s=661DE6C06A4F04B0&sms=E9D5496AB5D7C2B7',
-        body:'<h4>🐢 盾臂龜（蘇卡達象龜）</h4><ul><li>分布：非洲撒哈拉沙漠南緣的乾燥草原、沙漠邊緣。</li><li>特徵：背甲前後緣呈鋸齒狀，前肢鱗片大而重疊，擅長掘洞。</li><li>適應：多在清晨和黃昏活動；太熱會躲進洞，也能用唾液幫助降溫。</li><li>食性：吃高纖維植物，主要從食物取得水分。</li></ul>'
+        body:'<h4>🐢 蘇卡達象龜（盾臂龜）</h4><ul><li>分布於非洲撒哈拉沙漠南緣。</li><li>擅長掘洞，躲避晝夜溫差。</li><li>植食性，從食物攝取水分。</li></ul>'
       },
       {
         title:'可信網站：壽山動物園．蘇卡達象龜',
         kind:'page',
         url:'https://zoo.kcg.gov.tw/zh-tw/animal/46/',
-        body:'<h4>🌐 動物園資料摘要</h4><ul><li>蘇卡達象龜是世界體型第三大的陸龜。</li><li>生活在炎熱乾燥環境，白天高溫時減少活動。</li><li>身體強壯、活動力高；以植物為主食來攝取水分。</li></ul><p>課堂可對照：龜殼保護、掘洞避暑、淺色外觀減少吸熱。</p>'
+        body:'<h4>🌐 壽山動物園摘要</h4><ul><li>世界體型第三大的陸龜。</li><li>背甲前後緣鋸齒狀，前肢鱗片大而重疊。</li><li>清晨黃昏活動；太熱會用泥沙與唾液幫助降溫。</li></ul>'
       },
       {
         title:'短片：盾臂龜（蘇卡達）介紹',
         kind:'video',
         url:'https://www.youtube.com/embed/ZFwgowZsegk'
+      },
+      {
+        title:'熱門轉載：盾臂龜冰殼降溫法',
+        kind:'fake',
+        body:'<div class="fake-site">🔥 沙漠動物奇聞網 · 轉載 · 無作者</div><h4>專家都唔敢講：盾臂龜靠「冰殼」生存？</h4><p>據說盾臂龜嘅龜殼其實係天然雪櫃，可以儲存冰塊，中午太陽猛就食冰降溫。佢哋唔會掘洞，因為洞太熱！皮膚越深色越好，方便吸收「宇宙能量」。</p><p>呢段內容冇機構、冇日期、亦冇其他可靠來源可以核對——請同可信網站比較吓！</p><div class="fake-warn">🕵️ 偵探提示：亂作內容通常誇張、缺出處。對照動物園等可靠資料。</div>'
       }
     ]
   },
   {
     key:'meerkat', name:'狐獴', full:'狐獴', emoji:'🦦',
+    icon:'assets/meerkat.png',
     pairs:[
       {t:'深色的眼圈', a:'減少陽光反射，看得更清楚'},
       {t:'直立站崗的姿勢', a:'及早發現天敵'},
@@ -505,21 +525,26 @@ var ANIMALS = [
     habit:'日間活動，成群生活，會輪流站崗放哨，住在沙地下面的洞穴。',
     sources:[
       {
-        title:'資料小卡：狐獴檔案',
+        title:'資料小卡：臺北動物園．狐獴',
         kind:'page',
-        url:'https://www.nationalzoo.si.edu/animals/meerkat',
-        body:'<h4>🦦 狐獴</h4><ul><li>分布：非洲南部乾燥草原、開闊平原。</li><li>特徵：眼周有深色斑，像「太陽眼鏡」減少眩光；前爪有力，擅於掘洞。</li><li>適應：住在地下洞穴避暑；群體輪流站崗，發現危險會示警。</li><li>水分：大多從食物取得，減少需要直接喝水。</li></ul>'
+        url:'https://www.zoo.gov.taipei/News_Content.aspx?n=8A35FDA6483C8C40&s=944209846533358D&sms=7BD336E90DA476DA',
+        body:'<h4>狐獴</h4><ul><li>眼眶黑斑似太陽眼鏡。</li><li>成群生活，輪流守衛。</li><li>挖洞為巢，爪利於挖掘。</li></ul>'
       },
       {
-        title:'可信網站：Smithsonian 國家動物園．Meerkat',
+        title:'可信網站：壽山動物園．狐獴',
         kind:'page',
-        url:'https://www.nationalzoo.si.edu/animals/meerkat',
-        body:'<h4>🌐 機構資料摘要</h4><ul><li>狐獴屬於獴科，群體生活，有時一群可達約 30 隻。</li><li>站崗者負責留意天敵，其他同伴覓食或照顧幼獸。</li><li>深色眼斑有助在強烈陽光下看得更清楚。</li></ul>'
+        url:'https://zoo.kcg.gov.tw/zh-tw/animal/16/',
+        body:'<h4>🌐 壽山動物園摘要</h4><ul><li>分布於南非等地。</li><li>黑眼圈減少強光影響；前爪適合挖洞；尾巴助站立平衡。</li><li>群體分工覓食、站崗、照顧幼獸。</li></ul>'
       },
       {
         title:'短片：狐獴怎樣合作求生',
         kind:'video',
         url:'https://www.youtube.com/embed/3HRplufFGBs'
+      },
+      {
+        title:'熱門轉載：狐獴獨行俠真相',
+        kind:'fake',
+        body:'<div class="fake-site">🔥 沙漠動物奇聞網 · 轉載 · 無作者</div><h4>最新發現：狐獴其實全部獨居？</h4><p>有「網友」話狐獴從來唔成群，亦唔會站崗——黑眼圈只係天生化妝，同陽光無關。佢哋日間瞓覺、夜晚先出嚟，同大家喺動物園見到嘅完全相反！</p><p>冇機構署名、冇更新日期、內容同可靠動物園資料打架。</p><div class="fake-warn">🕵️ 偵探提示：亂作內容通常誇張、缺出處。對照動物園等可靠資料。</div>'
       }
     ]
   },
@@ -533,21 +558,26 @@ var ANIMALS = [
     habit:'夜間活動，日間躲在洞穴裡，主要吃種子和昆蟲。',
     sources:[
       {
-        title:'資料小卡：非洲跳鼠檔案',
+        title:'資料小卡：教育百科．沙漠跳鼠',
         kind:'page',
-        url:'https://kids.britannica.com/students/article/jerboa/327554',
-        body:'<h4>🐭 跳鼠（Jerboa）</h4><ul><li>分布：亞洲與北非的沙漠、乾旱平原。</li><li>特徵：後腿特別長，可大躍步逃走；尾巴長，幫助平衡。</li><li>適應：日間躲在洞裡，夜間出來覓食；大耳朵有助散熱。</li><li>食性：種子、植物，有時吃昆蟲；水分多從食物取得。</li></ul>'
+        url:'https://pedia.cloud.edu.tw/Entry/Detail?title=%E6%B2%99%E6%BC%A0%E8%B7%B3%E9%BC%A0',
+        body:'<h4>沙漠跳鼠</h4><ul><li>後腳長，以跳躍前進。</li><li>夜行性，挖洞居住。</li><li>不太需要直接喝水。</li></ul>'
       },
       {
-        title:'可信網站：牛津大學博物館 Learning Zone',
+        title:'可信網站：香港生物多樣性博物館．跳鼠',
         kind:'page',
-        url:'https://learningzone.oumnh.ox.ac.uk/excretion',
-        body:'<h4>🌐 沙漠求生小知識</h4><ul><li>跳鼠生活在缺水環境，腎臟會盡量回收水分，尿液很濃。</li><li>強勁後腿一次可跳很遠，方便逃走和在沙地移動。</li><li>課堂對照：長後腿跳躍、大耳散熱、長尾平衡。</li></ul>'
+        url:'https://www.hkbiodiversitymuseum.org/mammalorders/dipodidae',
+        body:'<h4>🌐 跳鼠總科摘要</h4><ul><li>後肢伸長適合跳躍；尾巴長助平衡。</li><li>多見於北非及亞洲乾旱棲息地。</li></ul>'
       },
       {
         title:'短片：跳鼠小檔案',
         kind:'video',
         url:'https://www.youtube.com/embed/BhecZbJscpY'
+      },
+      {
+        title:'熱門轉載：跳鼠游泳過沙漠',
+        kind:'fake',
+        body:'<div class="fake-site">🔥 沙漠動物奇聞網 · 轉載 · 無作者</div><h4>驚人！非洲跳鼠靠短腿游泳穿越沙漠</h4><p>文章聲稱跳鼠後腿好短，主要靠「沙海游泳」前進；大耳朵係用嚟裝沙玩；長尾巴冇用，進化失敗！</p><p>呢啲講法同教育百科、博物館資料相反，而且完全冇引用來源。</p><div class="fake-warn">🕵️ 偵探提示：亂作內容通常誇張、缺出處。對照動物園等可靠資料。</div>'
       }
     ]
   },
@@ -561,21 +591,26 @@ var ANIMALS = [
     habit:'多在清晨和黃昏活動，獨自生活，吃沙漠植物。',
     sources:[
       {
-        title:'資料小卡：沙漠野兔檔案',
+        title:'資料小卡：TNC．長耳大野兔',
         kind:'page',
-        url:'https://www.desertmuseum.org/kids/facts/?animal=Black-tailed+and+Antelope+Jackrabbit',
-        body:'<h4>🐰 沙漠野兔／長耳大野兔</h4><ul><li>長耳朵不只聽到敵人，還像「散熱器」：耳內有很多血管，熱時把熱量散到空氣中。</li><li>淺色毛有助融入沙地，較難被發現。</li><li>強壯後腿可高速奔跑逃走；白天炎熱時較少活動，減少失水。</li></ul>'
+        url:'https://www.tnc.org.cn/content/details29_1359.html',
+        body:'<h4>長耳大野兔</h4><ul><li>大耳朵兼具聽覺與散熱。</li><li>耳內血管擴張時可帶走多餘熱量。</li></ul>'
       },
       {
-        title:'可信網站：美國國家公園．長耳大野兔',
+        title:'可信網站：AskNature．野兔耳朵散熱',
         kind:'page',
-        url:'https://www.nps.gov/whsa/learn/nature/black-tailed-jackrabbit.htm',
-        body:'<h4>🌐 機構資料摘要</h4><ul><li>長耳朵幫助聽覺，也幫助調節體溫。</li><li>天熱時耳部血管擴張，把體內熱量散走；天冷則減少血流保暖。</li><li>喜歡開闊地方，方便發現敵人並快速逃走。</li></ul>'
+        url:'https://asknature.org/zh-CN/%E7%AD%96%E7%95%A5/%E8%A1%80%E6%B6%B2%E6%B5%81%E5%8A%A8%E5%A6%82%E4%BD%95%E8%AE%A9%E9%95%BF%E8%80%B3%E5%A4%A7%E9%87%8E%E5%85%94%E4%BF%9D%E6%8C%81%E7%87%89%E7%88%BD/',
+        body:'<h4>🌐 AskNature 摘要</h4><ul><li>大耳朵布滿血管，幫助散熱並減少失水。</li></ul>'
       },
       {
         title:'短片：野兔與猛禽追逐（觀察跑步）',
         kind:'video',
         url:'https://www.youtube.com/embed/Ai3eVjr0Pzg'
+      },
+      {
+        title:'熱門轉載：野兔黑毛迷彩術',
+        kind:'fake',
+        body:'<div class="fake-site">🔥 沙漠動物奇聞網 · 轉載 · 無作者</div><h4>科學家震驚：沙漠野兔毛色越黑越好匿</h4><p>傳聞長耳朵係用嚟裝沙，完全唔散熱；毛色應該深黑先融入「沙漠影子」。後腿弱，主要靠滾下山坡逃走。</p><p>冇可靠機構背書，同科普文章矛盾。</p><div class="fake-warn">🕵️ 偵探提示：亂作內容通常誇張、缺出處。對照動物園等可靠資料。</div>'
       }
     ]
   },
@@ -589,21 +624,26 @@ var ANIMALS = [
     habit:'可以長時間不喝水，日間活動，喜歡成群一起生活。',
     sources:[
       {
-        title:'資料小卡：駱駝檔案',
+        title:'資料小卡：臺北動物園．雙峰駱駝',
         kind:'page',
-        url:'https://www.nhm.ac.uk/discover/how-do-camels-survive-in-deserts.html',
-        body:'<h4>🐪 駱駝</h4><ul><li>駝峰儲存的是<strong>脂肪</strong>（不是水），缺少食物時轉成能量。</li><li>長睫毛、可關閉的鼻孔，減少風沙進入眼睛和鼻子。</li><li>寬厚腳掌分散重量，較不易陷入沙中。</li><li>很會節約用水：少出汗、尿液濃；需要時可一次喝很多水補充。</li></ul>'
+        url:'https://www.zoo.gov.taipei/News_Content.aspx?n=81B36287B484991A&s=64CDD61D62B47991&sms=D54AA24FF4116F0D',
+        body:'<h4>雙峰駱駝</h4><ul><li>駝峰儲藏脂肪提供能量。</li><li>濃密睫毛、可防風沙。</li><li>腳掌扁平適合走沙。</li></ul>'
       },
       {
-        title:'可信網站：WWF．駱駝的超能力',
+        title:'可信網站：壽山動物園．單峰駱駝',
         kind:'page',
-        url:'https://www.worldwildlife.org/resources/explainers/wildlife-climate-heroes/what-do-camels-store-in-their-humps-and-other-camel-superpowers/',
-        body:'<h4>🌐 WWF 資料摘要</h4><ul><li>常見誤解：駝峰裝水 ✗；正確：駝峰主要儲存脂肪 ✓。</li><li>駱駝能在乾旱環境長途行走，對乾旱地區社區亦很重要。</li><li>課堂可核對：脂肪能量、睫毛擋沙、腳掌走沙。</li></ul>'
+        url:'https://zoo.kcg.gov.tw/zh-tw/animal/56/',
+        body:'<h4>🌐 壽山動物園摘要</h4><ul><li>駝峰儲存脂肪；睫毛、雙層眼瞼、可關閉鼻孔防風沙。</li></ul>'
       },
       {
         title:'短片：駱駝怎樣適應沙漠',
         kind:'video',
         url:'https://www.youtube.com/embed/FSjZm_QIGAg'
+      },
+      {
+        title:'熱門轉載：駝峰裝水大揭密',
+        kind:'fake',
+        body:'<div class="fake-site">🔥 沙漠動物奇聞網 · 轉載 · 無作者</div><h4>人人都錯咗：駝峰入面裝嘅係水？</h4><p>呢篇話駝峰係水桶，腳掌幼細先好「插沙企穩」，長睫毛只係為咗靚。完全唔提脂肪同散熱。</p><p>同臺北／壽山動物園資料相反，而且無署名無日期。</p><div class="fake-warn">🕵️ 偵探提示：亂作內容通常誇張、缺出處。對照動物園等可靠資料。</div>'
       }
     ]
   }
@@ -611,6 +651,20 @@ var ANIMALS = [
 
 var ANIMAL_MAP = {};
 ANIMALS.forEach(function(a){ ANIMAL_MAP[a.key] = a; });
+
+function animalFaceHtml(a, sizeClass){
+  if(!a) return '';
+  if(a.icon){
+    return '<img class="animal-icon ' + (sizeClass || '') + '" src="' + a.icon + '" alt="' + a.name + '">';
+  }
+  return '<span aria-hidden="true">' + a.emoji + '</span>';
+}
+function animalLabelHtml(a, sizeClass){
+  if(!a) return '';
+  return animalFaceHtml(a, sizeClass || 'sm') + ' ' + a.name;
+}
+
+
 
 var SOURCES = [
   {
@@ -746,11 +800,11 @@ function updateTopbar(){
   if(currentScreen >= 2 && currentScreen <= 6){
     var g = curGroup();
     var a = (g && g.animal) ? ANIMAL_MAP[g.animal] : null;
-    badge.textContent = a ? (a.emoji + ' ' + a.name) : '';
+    if(a){ badge.innerHTML = animalLabelHtml(a); } else { badge.textContent = ''; }
   } else if(currentScreen === 1){
     var g1 = state.groups[0];
     var a1 = (g1 && g1.animal) ? ANIMAL_MAP[g1.animal] : null;
-    badge.textContent = a1 ? ('已揀・' + a1.emoji + ' ' + a1.name) : '揀動物';
+    badge.innerHTML = a1 ? ('已揀・' + animalLabelHtml(a1)) : '揀動物';
   } else {
     badge.textContent = '';
   }
@@ -769,7 +823,7 @@ function renderScreen1(){
     b.className = 'pick-card' + (g.animal === a.key ? ' selected' : '');
     b.setAttribute('role', 'option');
     b.setAttribute('aria-selected', g.animal === a.key ? 'true' : 'false');
-    b.innerHTML = '<span class="pe" aria-hidden="true">' + a.emoji + '</span><span class="pn">' + a.name + '</span>';
+    b.innerHTML = '<span class="pe">' + animalFaceHtml(a) + '</span><span class="pn">' + a.name + '</span>';
     b.addEventListener('click', function(){
       // 學生揀動物：重置該組任務進度，換新動物
       g.animal = a.key;
@@ -785,7 +839,7 @@ function renderScreen1(){
       selectedTrait = null;
       save();
       renderScreen1();
-      toast('已揀：' + a.emoji + ' ' + a.name);
+      toast('已揀：' + a.name);
     });
     grid.appendChild(b);
   });
@@ -813,7 +867,7 @@ function renderTeacherDraw(){
 
     var animalEl = document.createElement('div');
     animalEl.className = 'g-animal' + (a ? '' : ' empty');
-    animalEl.textContent = a ? (a.emoji + ' ' + a.name) : '未抽';
+    if(a){ animalEl.innerHTML = animalLabelHtml(a); } else { animalEl.textContent = '未抽'; }
 
     var btn = document.createElement('button');
     btn.className = 'btn';
@@ -841,7 +895,7 @@ function renderTeacherDraw(){
       var chip = document.createElement('div');
       var used = state.pool.indexOf(a.key) === -1;
       chip.className = 'pool-chip' + (used ? ' used' : '');
-      chip.textContent = a.emoji + ' ' + a.name;
+      chip.innerHTML = animalLabelHtml(a);
       poolRow.appendChild(chip);
     });
   }
@@ -886,7 +940,7 @@ function renderScreen2(){
   var a = ANIMAL_MAP[g.animal];
 
   document.getElementById('taskAnimal').innerHTML =
-    '<div class="ab-emoji">' + a.emoji + '</div>' +
+    '<div class="ab-emoji">' + animalFaceHtml(a, 'lg') + '</div>' +
     '<div>' +
       '<div class="ab-name">' + a.full + '</div>' +
       '<div class="ab-sub">第 ' + g.id + ' 組．一齊討論以下三個問題</div>' +
@@ -972,7 +1026,7 @@ function renderScreen4(){
   // 資料來源按鈕（彈框觀看，唔開新分頁）
   var sb = document.getElementById('sourceBtns');
   sb.innerHTML = '';
-  var icons = ['🗂️','🌐','🎬'];
+  var icons = ['🗂️','🌐','🎬','📰'];
   var list = a.sources || [];
   list.forEach(function(src, i){
     var b = document.createElement('button');
@@ -1164,7 +1218,7 @@ function renderTeacher(){
   var t3 = '';
   ANIMALS.forEach(function(a){
     t3 += '<div class="answer-block">';
-    t3 += '<div class="an-name">' + a.emoji + ' ' + a.full + '</div>';
+    t3 += '<div class="an-name">' + animalLabelHtml(a) + '（' + a.full + '）</div>';
     a.pairs.forEach(function(p){
       t3 += '<div class="an-row"><b>' + p.t + '</b> → ' + p.a + '</div>';
     });
@@ -1177,6 +1231,10 @@ function renderTeacher(){
     t3 += '<div class="an-row">' + (i+1) + '. ' + s.title + ' → <b>' +
           (s.trust ? '可信' : '唔可信') + '</b>（' + s.why + '）</div>';
   });
+  t3 += '</div>';
+  t3 += '<div class="answer-block">';
+  t3 += '<div class="an-name">🕵️ 資料站「熱門轉載」= 亂作（唔可靠）</div>';
+  t3 += '<div class="an-row">每隻動物第四個來源標題含「熱門轉載」，內容故意寫錯，考學生同動物園／百科對照。</div>';
   t3 += '</div>';
   document.getElementById('tAnswers').innerHTML = t3;
 }
@@ -1205,6 +1263,16 @@ function openSourceModal(src){
   if(!modal || !src) return;
   title.textContent = src.title || '資料';
   body.innerHTML = '';
+
+  // 亂作內容：彈框顯示假網頁文，考可靠性（唔開外站）
+  if(src.kind === 'fake'){
+    var wrap = document.createElement('div');
+    wrap.className = 'src-fake-page';
+    wrap.innerHTML = src.body || '<p>暫未有內容。</p>';
+    body.appendChild(wrap);
+    modal.classList.remove('hidden');
+    return;
+  }
 
   var isVideo = src.kind === 'video';
   var url = src.url || '';
