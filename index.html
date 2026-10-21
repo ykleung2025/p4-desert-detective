@@ -79,7 +79,10 @@ h1,h2,h3{margin:0 0 10px;}
 
 /* ============ 首頁 ============ */
 .hero{text-align:center;padding:5vh 10px 20px;}
-.hero-emoji{font-size:42px;letter-spacing:4px;line-height:1.4;}
+.hero-emoji{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:nowrap;font-size:42px;line-height:1;letter-spacing:0;}
+.hero-emoji > span{font-size:42px;line-height:1;}
+.hero-emoji .animal-icon{width:42px;height:42px;object-fit:contain;flex:0 0 auto;}
+
 .hero h1{font-size:clamp(34px,7vw,52px);color:#b8561a;letter-spacing:2px;margin:14px 0 0;}
 .slogan{font-size:clamp(20px,4.2vw,28px);font-weight:800;color:#7a5227;margin:20px 0 38px;letter-spacing:1px;}
 .hero-btns{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
@@ -281,10 +284,9 @@ td.ans{color:#276b42;font-weight:700;}
 .animal-icon.lg{width:72px;height:72px;}
 .animal-icon.sm{width:28px;height:28px;display:inline-block;vertical-align:middle;margin-right:4px;}
 .pick-card .pe,.ab-emoji{display:flex;align-items:center;justify-content:center;min-height:56px;}
-.pick-card .pe .animal-icon{width:56px;height:56px;}
+.pick-card .pe{font-size:48px;line-height:1;}
+.pick-card .pe .animal-icon{width:52px;height:52px;}
 .ab-emoji .animal-icon{width:72px;height:72px;}
-.hero-emoji{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
-.hero-emoji .animal-icon{width:40px;height:40px;}
 .src-fake-badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:#ffe8e0;color:#b33;font-size:13px;font-weight:800;}
 .src-fake-page{padding:18px 20px 24px;background:linear-gradient(#fff,#fff8f0);font-size:18px;line-height:1.55;color:#3a2a1a;}
 .src-fake-page .fake-site{font-size:13px;color:#c45;font-weight:800;letter-spacing:.5px;margin-bottom:6px;}
@@ -303,7 +305,7 @@ td.ans{color:#276b42;font-weight:700;}
 <!-- ============ 畫面 0：首頁 ============ -->
 <section id="s0" class="screen active">
   <div class="hero">
-    <div class="hero-emoji"><span aria-hidden="true">🐢</span><img class="animal-icon" src="assets/meerkat.png" alt="狐獴"><span aria-hidden="true">🐭</span><span aria-hidden="true">🐰</span><span aria-hidden="true">🐪</span></div>
+    <div class="hero-emoji" aria-hidden="true"><span>🐢</span><img class="animal-icon" src="assets/meerkat.png" alt=""><span>🐭</span><span>🐰</span><span>🐪</span></div>
     <h1>沙漠小偵探</h1>
     <p class="slogan">揀動物 → 搵線索 → 講發現！</p>
     <div class="hero-btns">
@@ -370,7 +372,7 @@ td.ans{color:#276b42;font-weight:700;}
   <div class="two-col">
     <div class="card">
       <h3>📚 資料站</h3>
-      <p class="small">點一點來源，就會彈框開啟網頁／短片（唔會開新分頁）。留意：有一個「熱門轉載」可能唔可靠。</p>
+      <p class="small">點一點來源，就會彈框顯示資料／短片（唔會開新分頁）。留意：有一個「熱門轉載」可能唔可靠。</p>
       <div id="sourceBtns"></div>
     </div>
 
@@ -494,13 +496,13 @@ var ANIMALS = [
         title:'資料小卡：臺北動物園．蘇卡達象龜',
         kind:'page',
         url:'https://www.zoo.gov.taipei/News_Content.aspx?n=CBF299753897CE64&s=661DE6C06A4F04B0&sms=E9D5496AB5D7C2B7',
-        body:'<h4>🐢 蘇卡達象龜（盾臂龜）</h4><ul><li>分布於非洲撒哈拉沙漠南緣。</li><li>擅長掘洞，躲避晝夜溫差。</li><li>植食性，從食物攝取水分。</li></ul>'
+        body:'<h4>🐢 蘇卡達象龜（盾臂龜）</h4><p>整理自臺北市立動物園動物圖鑑。</p><ul><li><b>分布／棲地</b>：非洲撒哈拉沙漠南部至埃及一帶；乾燥草原、灌叢、沙漠邊緣。</li><li><b>特徵</b>：世界體型第三大的陸龜；背甲前後緣鋸齒狀；前肢鱗片大而重疊。</li><li><b>適應</b>：擅長掘洞，躲避白天高溫與夜晚低溫；晨昏活動。</li><li><b>食性</b>：植食性，主要從食物攝取所需水分。</li></ul>'
       },
       {
         title:'可信網站：壽山動物園．蘇卡達象龜',
         kind:'page',
         url:'https://zoo.kcg.gov.tw/zh-tw/animal/46/',
-        body:'<h4>🌐 壽山動物園摘要</h4><ul><li>世界體型第三大的陸龜。</li><li>背甲前後緣鋸齒狀，前肢鱗片大而重疊。</li><li>清晨黃昏活動；太熱會用泥沙與唾液幫助降溫。</li></ul>'
+        body:'<h4>🌐 壽山動物園．蘇卡達象龜</h4><p>整理自壽山動物園介紹。</p><ul><li>與加拉巴哥、亞達伯拉並列世界三大陸龜，體型排第三。</li><li>以高纖維植物為主食來攝取水分。</li><li>清晨及黃昏活動；太熱時會把較冷泥沙潑在殼上，並用唾液塗前腳幫助降溫。</li><li>課堂對照：龜殼保護、粗壯前肢掘洞、淺色外觀減少吸熱。</li></ul>'
       },
       {
         title:'短片：盾臂龜（蘇卡達）介紹',
@@ -528,13 +530,13 @@ var ANIMALS = [
         title:'資料小卡：臺北動物園．狐獴',
         kind:'page',
         url:'https://www.zoo.gov.taipei/News_Content.aspx?n=8A35FDA6483C8C40&s=944209846533358D&sms=7BD336E90DA476DA',
-        body:'<h4>狐獴</h4><ul><li>眼眶黑斑似太陽眼鏡。</li><li>成群生活，輪流守衛。</li><li>挖洞為巢，爪利於挖掘。</li></ul>'
+        body:'<h4>狐獴</h4><p>整理自臺北市立動物園動物圖鑑。</p><ul><li><b>分布</b>：南非、奈米比亞、安哥拉西南部喀拉哈里沙漠等。</li><li><b>特徵</b>：眼眶黑斑似太陽眼鏡；耳小且可閉合防沙；彎曲利爪擅挖掘；細長尾巴助直立平衡。</li><li><b>習性</b>：成群生活，挖地洞為巢；覓食時有成員站崗示警。</li><li><b>食性</b>：肉食性，以節肢動物、蜥蜴等為主。</li></ul>'
       },
       {
         title:'可信網站：壽山動物園．狐獴',
         kind:'page',
         url:'https://zoo.kcg.gov.tw/zh-tw/animal/16/',
-        body:'<h4>🌐 壽山動物園摘要</h4><ul><li>分布於南非等地。</li><li>黑眼圈減少強光影響；前爪適合挖洞；尾巴助站立平衡。</li><li>群體分工覓食、站崗、照顧幼獸。</li></ul>'
+        body:'<h4>🌐 壽山動物園．狐獴</h4><p>整理自壽山動物園介紹。</p><ul><li>約 30 隻同伴一起生活；成員幫忙覓食、警衛、照顧新生兒。</li><li>眼睛周圍黑色，功能像太陽眼鏡，大太陽下視力較不受影響。</li><li>前爪強而有力適合挖地洞；耳朵挖洞時可閉合；尾巴細長保持平衡。</li></ul>'
       },
       {
         title:'短片：狐獴怎樣合作求生',
@@ -561,13 +563,13 @@ var ANIMALS = [
         title:'資料小卡：教育百科．沙漠跳鼠',
         kind:'page',
         url:'https://pedia.cloud.edu.tw/Entry/Detail?title=%E6%B2%99%E6%BC%A0%E8%B7%B3%E9%BC%A0',
-        body:'<h4>沙漠跳鼠</h4><ul><li>後腳長，以跳躍前進。</li><li>夜行性，挖洞居住。</li><li>不太需要直接喝水。</li></ul>'
+        body:'<h4>沙漠跳鼠</h4><p>整理自國家教育研究院／教育百科。</p><ul><li><b>形態</b>：後腳長、以跳躍前進；尾長幫助平衡；體色偏沙黃。</li><li><b>習性</b>：夜行性，會挖掘地洞；喜歡沙質等乾旱環境。</li><li><b>食性／水分</b>：吃根芽種子等，不太需要直接喝水。</li><li>課堂對照：長後腿跳躍、大耳散熱、長尾平衡。</li></ul>'
       },
       {
         title:'可信網站：香港生物多樣性博物館．跳鼠',
         kind:'page',
         url:'https://www.hkbiodiversitymuseum.org/mammalorders/dipodidae',
-        body:'<h4>🌐 跳鼠總科摘要</h4><ul><li>後肢伸長適合跳躍；尾巴長助平衡。</li><li>多見於北非及亞洲乾旱棲息地。</li></ul>'
+        body:'<h4>🌐 香港生物多樣性博物館．跳鼠</h4><p>整理自 HKBM 跳鼠總科介紹。</p><ul><li>「兩隻腳」特徵：後肢特別長，適合跳躍。</li><li>尾巴通常比身體長，幫助平衡。</li><li>多生活於開闊乾旱棲息地，例如沙漠。</li></ul>'
       },
       {
         title:'短片：跳鼠小檔案',
@@ -594,13 +596,13 @@ var ANIMALS = [
         title:'資料小卡：TNC．長耳大野兔',
         kind:'page',
         url:'https://www.tnc.org.cn/content/details29_1359.html',
-        body:'<h4>長耳大野兔</h4><ul><li>大耳朵兼具聽覺與散熱。</li><li>耳內血管擴張時可帶走多餘熱量。</li></ul>'
+        body:'<h4>長耳大野兔</h4><p>整理自大自然保護協會（TNC）科普。</p><ul><li>大耳朵除了聽天敵，也是散熱器官。</li><li>耳朵幾乎無毛、布滿血管；血管擴張時可把多餘熱量散到空氣中。</li><li>約 30°C 以上時，耳朵對散熱特別重要。</li><li>課堂對照：長耳散熱、淺色毛隱藏、強壯後腿奔跑。</li></ul>'
       },
       {
         title:'可信網站：AskNature．野兔耳朵散熱',
         kind:'page',
         url:'https://asknature.org/zh-CN/%E7%AD%96%E7%95%A5/%E8%A1%80%E6%B6%B2%E6%B5%81%E5%8A%A8%E5%A6%82%E4%BD%95%E8%AE%A9%E9%95%BF%E8%80%B3%E5%A4%A7%E9%87%8E%E5%85%94%E4%BF%9D%E6%8C%81%E7%87%89%E7%88%BD/',
-        body:'<h4>🌐 AskNature 摘要</h4><ul><li>大耳朵布滿血管，幫助散熱並減少失水。</li></ul>'
+        body:'<h4>🌐 AskNature．野兔耳朵散熱</h4><p>整理自 AskNature 中文策略頁。</p><ul><li>大耳朵提供大面積皮膚與血管網絡，幫助降溫。</li><li>氣溫略低於體溫時，耳部血管舒張，把熱量散走。</li><li>此方式減少靠喘氣／出汗散熱，有助在乾旱環境節省水分。</li></ul>'
       },
       {
         title:'短片：野兔與猛禽追逐（觀察跑步）',
@@ -627,13 +629,13 @@ var ANIMALS = [
         title:'資料小卡：臺北動物園．雙峰駱駝',
         kind:'page',
         url:'https://www.zoo.gov.taipei/News_Content.aspx?n=81B36287B484991A&s=64CDD61D62B47991&sms=D54AA24FF4116F0D',
-        body:'<h4>雙峰駱駝</h4><ul><li>駝峰儲藏脂肪提供能量。</li><li>濃密睫毛、可防風沙。</li><li>腳掌扁平適合走沙。</li></ul>'
+        body:'<h4>雙峰駱駝</h4><p>整理自臺北市立動物園動物圖鑑。</p><ul><li><b>駝峰</b>：儲藏脂肪，提供身體所需能量（不是水桶）。</li><li><b>防沙</b>：濃密睫毛、耳內細毛等，減少風沙侵入。</li><li><b>腳掌</b>：二趾、肉墊厚軟成扁平扇形，走沙較不易下陷。</li><li>若駝峰塌陷歪垂，吃飽休息後可再恢復。</li></ul>'
       },
       {
         title:'可信網站：壽山動物園．單峰駱駝',
         kind:'page',
         url:'https://zoo.kcg.gov.tw/zh-tw/animal/56/',
-        body:'<h4>🌐 壽山動物園摘要</h4><ul><li>駝峰儲存脂肪；睫毛、雙層眼瞼、可關閉鼻孔防風沙。</li></ul>'
+        body:'<h4>🌐 壽山動物園．單峰駱駝</h4><p>整理自壽山動物園介紹。</p><ul><li>駝峰用來儲存脂肪；靠脂肪與節約用水能耐饑渴。</li><li>長睫毛、雙層眼瞼、鼻孔可關閉、耳內細毛，都可防風沙。</li><li>寬大腳掌有厚軟肉墊，較不易陷入鬆軟沙土。</li></ul>'
       },
       {
         title:'短片：駱駝怎樣適應沙漠',
@@ -657,7 +659,7 @@ function animalFaceHtml(a, sizeClass){
   if(a.icon){
     return '<img class="animal-icon ' + (sizeClass || '') + '" src="' + a.icon + '" alt="' + a.name + '">';
   }
-  return '<span aria-hidden="true">' + a.emoji + '</span>';
+  return '<span class="emoji-face" aria-hidden="true">' + a.emoji + '</span>';
 }
 function animalLabelHtml(a, sizeClass){
   if(!a) return '';
@@ -1264,7 +1266,6 @@ function openSourceModal(src){
   title.textContent = src.title || '資料';
   body.innerHTML = '';
 
-  // 亂作內容：彈框顯示假網頁文，考可靠性（唔開外站）
   if(src.kind === 'fake'){
     var wrap = document.createElement('div');
     wrap.className = 'src-fake-page';
@@ -1274,60 +1275,32 @@ function openSourceModal(src){
     return;
   }
 
-  var isVideo = src.kind === 'video';
-  var url = src.url || '';
-
-  if(url && (isVideo || src.kind === 'page' || !src.kind)){
-    // 資料卡／可信網站：彈框內 iframe 瀏覽網頁；短片用 embed
-    if(!isVideo){
-      var bar = document.createElement('div');
-      bar.className = 'src-browse-bar';
-      var code = document.createElement('code');
-      code.textContent = url;
-      bar.appendChild(code);
-      if(src.body){
-        var fb = document.createElement('button');
-        fb.type = 'button';
-        fb.className = 'src-fallback-btn';
-        fb.textContent = '若網頁空白可睇摘要';
-        fb.addEventListener('click', function(){
-          body.innerHTML = '';
-          var wrap = document.createElement('div');
-          wrap.className = 'src-article';
-          wrap.innerHTML = src.body;
-          var ref = document.createElement('div');
-          ref.className = 'src-ref';
-          ref.textContent = '來源：' + url;
-          wrap.appendChild(ref);
-          body.appendChild(wrap);
-        });
-        bar.appendChild(fb);
-      }
-      body.appendChild(bar);
-    }
-
+  if(src.kind === 'video' && src.url){
     var iframe = document.createElement('iframe');
-    iframe.src = isVideo
-      ? (url + (url.indexOf('?') >= 0 ? '&' : '?') + 'rel=0')
-      : url;
-    iframe.title = src.title || (isVideo ? '短片' : '網頁');
-    iframe.referrerPolicy = 'no-referrer-when-downgrade';
-    if(isVideo){
-      iframe.className = 'is-video';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-      iframe.allowFullscreen = true;
-    } else {
-      // 容許學生喺彈框內點連結瀏覽
-      iframe.setAttribute('allowfullscreen', '');
-    }
+    iframe.className = 'is-video';
+    iframe.src = src.url + (src.url.indexOf('?') >= 0 ? '&' : '?') + 'rel=0';
+    iframe.title = src.title || '短片';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
     body.appendChild(iframe);
-  } else {
-    var wrap = document.createElement('div');
-    wrap.className = 'src-article';
-    wrap.innerHTML = src.body || '<p>暫未有摘要。</p>';
-    body.appendChild(wrap);
+    modal.classList.remove('hidden');
+    return;
   }
 
+  // 資料卡／可信網站：多數中文站禁止 iframe，改喺彈框顯示整理好嘅內容＋來源網址
+  var wrap = document.createElement('div');
+  wrap.className = 'src-article';
+  wrap.innerHTML = src.body || '<p>暫未有摘要。</p>';
+  if(src.url){
+    var ref = document.createElement('div');
+    ref.className = 'src-ref';
+    ref.innerHTML = '<div style="margin-bottom:6px;font-weight:800;color:#8a4410;">來源網站（課堂可請老師出示）</div>';
+    var code = document.createElement('code');
+    code.textContent = src.url;
+    ref.appendChild(code);
+    wrap.appendChild(ref);
+  }
+  body.appendChild(wrap);
   modal.classList.remove('hidden');
 }
 
