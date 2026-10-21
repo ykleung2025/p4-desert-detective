@@ -264,7 +264,13 @@ td.ans{color:#276b42;font-weight:700;}
 .src-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:#fff3e0;border-bottom:2px solid #f0d4b0;}
 .src-modal-head h3{margin:0;font-size:22px;color:#8a4410;}
 .src-modal-body{padding:0;flex:1;min-height:280px;overflow:auto;background:#fff;}
-.src-modal-body iframe{width:100%;height:min(62vh,520px);border:0;display:block;background:#111;}
+.src-modal-body iframe{width:100%;height:min(72vh,640px);border:0;display:block;background:#f7f3ea;}
+.src-modal-body iframe.is-video{background:#111;height:min(62vh,520px);}
+.src-browse-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 12px;background:#fff8ee;border-bottom:1px solid #f0d4b0;font-size:14px;color:#8a7358;}
+.src-browse-bar code{font-size:12px;word-break:break-all;color:#6a5538;flex:1;min-width:120px;}
+.src-fallback-btn{border:0;background:#ffe0b8;color:#8a4410;border-radius:999px;padding:6px 12px;font-weight:800;cursor:pointer;font-size:14px;}
+.src-fallback-btn:active{transform:scale(.97);}
+
 .src-article{padding:18px 20px 24px;font-size:19px;line-height:1.55;color:#3a2a1a;}
 .src-article h4{margin:0 0 10px;color:#b8561a;font-size:22px;}
 .src-article ul{margin:8px 0 12px 1.2em;padding:0;}
@@ -350,7 +356,7 @@ td.ans{color:#276b42;font-weight:700;}
   <div class="two-col">
     <div class="card">
       <h3>📚 資料站</h3>
-      <p class="small">點一點來源，就會彈框顯示資料（唔會開新分頁）。</p>
+      <p class="small">點一點來源，就會彈框開啟網頁／短片（唔會開新分頁）。</p>
       <div id="sourceBtns"></div>
     </div>
 
@@ -472,13 +478,13 @@ var ANIMALS = [
     sources:[
       {
         title:'資料小卡：盾臂龜檔案',
-        kind:'article',
+        kind:'page',
         url:'https://www.zoo.gov.taipei/News_Content.aspx?n=CBF299753897CE64&s=661DE6C06A4F04B0&sms=E9D5496AB5D7C2B7',
         body:'<h4>🐢 盾臂龜（蘇卡達象龜）</h4><ul><li>分布：非洲撒哈拉沙漠南緣的乾燥草原、沙漠邊緣。</li><li>特徵：背甲前後緣呈鋸齒狀，前肢鱗片大而重疊，擅長掘洞。</li><li>適應：多在清晨和黃昏活動；太熱會躲進洞，也能用唾液幫助降溫。</li><li>食性：吃高纖維植物，主要從食物取得水分。</li></ul>'
       },
       {
         title:'可信網站：壽山動物園．蘇卡達象龜',
-        kind:'article',
+        kind:'page',
         url:'https://zoo.kcg.gov.tw/zh-tw/animal/46/',
         body:'<h4>🌐 動物園資料摘要</h4><ul><li>蘇卡達象龜是世界體型第三大的陸龜。</li><li>生活在炎熱乾燥環境，白天高溫時減少活動。</li><li>身體強壯、活動力高；以植物為主食來攝取水分。</li></ul><p>課堂可對照：龜殼保護、掘洞避暑、淺色外觀減少吸熱。</p>'
       },
@@ -500,13 +506,13 @@ var ANIMALS = [
     sources:[
       {
         title:'資料小卡：狐獴檔案',
-        kind:'article',
+        kind:'page',
         url:'https://www.nationalzoo.si.edu/animals/meerkat',
         body:'<h4>🦦 狐獴</h4><ul><li>分布：非洲南部乾燥草原、開闊平原。</li><li>特徵：眼周有深色斑，像「太陽眼鏡」減少眩光；前爪有力，擅於掘洞。</li><li>適應：住在地下洞穴避暑；群體輪流站崗，發現危險會示警。</li><li>水分：大多從食物取得，減少需要直接喝水。</li></ul>'
       },
       {
         title:'可信網站：Smithsonian 國家動物園．Meerkat',
-        kind:'article',
+        kind:'page',
         url:'https://www.nationalzoo.si.edu/animals/meerkat',
         body:'<h4>🌐 機構資料摘要</h4><ul><li>狐獴屬於獴科，群體生活，有時一群可達約 30 隻。</li><li>站崗者負責留意天敵，其他同伴覓食或照顧幼獸。</li><li>深色眼斑有助在強烈陽光下看得更清楚。</li></ul>'
       },
@@ -528,13 +534,13 @@ var ANIMALS = [
     sources:[
       {
         title:'資料小卡：非洲跳鼠檔案',
-        kind:'article',
+        kind:'page',
         url:'https://kids.britannica.com/students/article/jerboa/327554',
         body:'<h4>🐭 跳鼠（Jerboa）</h4><ul><li>分布：亞洲與北非的沙漠、乾旱平原。</li><li>特徵：後腿特別長，可大躍步逃走；尾巴長，幫助平衡。</li><li>適應：日間躲在洞裡，夜間出來覓食；大耳朵有助散熱。</li><li>食性：種子、植物，有時吃昆蟲；水分多從食物取得。</li></ul>'
       },
       {
         title:'可信網站：牛津大學博物館 Learning Zone',
-        kind:'article',
+        kind:'page',
         url:'https://learningzone.oumnh.ox.ac.uk/excretion',
         body:'<h4>🌐 沙漠求生小知識</h4><ul><li>跳鼠生活在缺水環境，腎臟會盡量回收水分，尿液很濃。</li><li>強勁後腿一次可跳很遠，方便逃走和在沙地移動。</li><li>課堂對照：長後腿跳躍、大耳散熱、長尾平衡。</li></ul>'
       },
@@ -556,13 +562,13 @@ var ANIMALS = [
     sources:[
       {
         title:'資料小卡：沙漠野兔檔案',
-        kind:'article',
+        kind:'page',
         url:'https://www.desertmuseum.org/kids/facts/?animal=Black-tailed+and+Antelope+Jackrabbit',
         body:'<h4>🐰 沙漠野兔／長耳大野兔</h4><ul><li>長耳朵不只聽到敵人，還像「散熱器」：耳內有很多血管，熱時把熱量散到空氣中。</li><li>淺色毛有助融入沙地，較難被發現。</li><li>強壯後腿可高速奔跑逃走；白天炎熱時較少活動，減少失水。</li></ul>'
       },
       {
         title:'可信網站：美國國家公園．長耳大野兔',
-        kind:'article',
+        kind:'page',
         url:'https://www.nps.gov/whsa/learn/nature/black-tailed-jackrabbit.htm',
         body:'<h4>🌐 機構資料摘要</h4><ul><li>長耳朵幫助聽覺，也幫助調節體溫。</li><li>天熱時耳部血管擴張，把體內熱量散走；天冷則減少血流保暖。</li><li>喜歡開闊地方，方便發現敵人並快速逃走。</li></ul>'
       },
@@ -584,13 +590,13 @@ var ANIMALS = [
     sources:[
       {
         title:'資料小卡：駱駝檔案',
-        kind:'article',
+        kind:'page',
         url:'https://www.nhm.ac.uk/discover/how-do-camels-survive-in-deserts.html',
         body:'<h4>🐪 駱駝</h4><ul><li>駝峰儲存的是<strong>脂肪</strong>（不是水），缺少食物時轉成能量。</li><li>長睫毛、可關閉的鼻孔，減少風沙進入眼睛和鼻子。</li><li>寬厚腳掌分散重量，較不易陷入沙中。</li><li>很會節約用水：少出汗、尿液濃；需要時可一次喝很多水補充。</li></ul>'
       },
       {
         title:'可信網站：WWF．駱駝的超能力',
-        kind:'article',
+        kind:'page',
         url:'https://www.worldwildlife.org/resources/explainers/wildlife-climate-heroes/what-do-camels-store-in-their-humps-and-other-camel-superpowers/',
         body:'<h4>🌐 WWF 資料摘要</h4><ul><li>常見誤解：駝峰裝水 ✗；正確：駝峰主要儲存脂肪 ✓。</li><li>駱駝能在乾旱環境長途行走，對乾旱地區社區亦很重要。</li><li>課堂可核對：脂肪能量、睫毛擋沙、腳掌走沙。</li></ul>'
       },
@@ -1200,23 +1206,57 @@ function openSourceModal(src){
   title.textContent = src.title || '資料';
   body.innerHTML = '';
 
-  if(src.kind === 'video' && src.url){
+  var isVideo = src.kind === 'video';
+  var url = src.url || '';
+
+  if(url && (isVideo || src.kind === 'page' || !src.kind)){
+    // 資料卡／可信網站：彈框內 iframe 瀏覽網頁；短片用 embed
+    if(!isVideo){
+      var bar = document.createElement('div');
+      bar.className = 'src-browse-bar';
+      var code = document.createElement('code');
+      code.textContent = url;
+      bar.appendChild(code);
+      if(src.body){
+        var fb = document.createElement('button');
+        fb.type = 'button';
+        fb.className = 'src-fallback-btn';
+        fb.textContent = '若網頁空白可睇摘要';
+        fb.addEventListener('click', function(){
+          body.innerHTML = '';
+          var wrap = document.createElement('div');
+          wrap.className = 'src-article';
+          wrap.innerHTML = src.body;
+          var ref = document.createElement('div');
+          ref.className = 'src-ref';
+          ref.textContent = '來源：' + url;
+          wrap.appendChild(ref);
+          body.appendChild(wrap);
+        });
+        bar.appendChild(fb);
+      }
+      body.appendChild(bar);
+    }
+
     var iframe = document.createElement('iframe');
-    iframe.src = src.url + (src.url.indexOf('?') >= 0 ? '&' : '?') + 'rel=0';
-    iframe.title = src.title || '短片';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    iframe.allowFullscreen = true;
+    iframe.src = isVideo
+      ? (url + (url.indexOf('?') >= 0 ? '&' : '?') + 'rel=0')
+      : url;
+    iframe.title = src.title || (isVideo ? '短片' : '網頁');
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    if(isVideo){
+      iframe.className = 'is-video';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+    } else {
+      // 容許學生喺彈框內點連結瀏覽
+      iframe.setAttribute('allowfullscreen', '');
+    }
     body.appendChild(iframe);
   } else {
     var wrap = document.createElement('div');
     wrap.className = 'src-article';
     wrap.innerHTML = src.body || '<p>暫未有摘要。</p>';
-    if(src.url){
-      var ref = document.createElement('div');
-      ref.className = 'src-ref';
-      ref.textContent = '來源：' + src.url;
-      wrap.appendChild(ref);
-    }
     body.appendChild(wrap);
   }
 
